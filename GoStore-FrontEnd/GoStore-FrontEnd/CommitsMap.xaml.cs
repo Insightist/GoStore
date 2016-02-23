@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GoStore_FrontEnd
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// CommitsMap.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CommitsMap : UserControl
     {
-        public MainWindow()
+        public CommitsMap()
         {
             InitializeComponent();
         }

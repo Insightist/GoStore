@@ -1,6 +1,9 @@
 ﻿<Window x:Class="GoStore_FrontEnd.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GoStore" Height="562" Width="1000" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen">
-    <Grid/>
+        Title="GoStore" Height="562" Width="1000" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen"
+        xmlns:local="clr-namespace:GoStore_FrontEnd">
+    <Grid>
+        <local:CommitsMap HorizontalAlignment="Left" x:Name="cmap1" VerticalAlignment="Top" Height="531" Width="215"/>
+    </Grid>  
 </Window>
