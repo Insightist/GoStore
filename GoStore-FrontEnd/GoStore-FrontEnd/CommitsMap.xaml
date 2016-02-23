@@ -4,13 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="421" d:DesignWidth="453" SnapsToDevicePixels="True">
-    <Grid>
-        <Rectangle Stroke="Black">
-            <Rectangle.Fill>
-                <ImageBrush TileMode="FlipXY"/>
-            </Rectangle.Fill>
-        </Rectangle>
+             d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#FFC7C7C7" Offset="1"/>
+            <GradientStop Color="#FFF0F0F0"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
 
+    <Grid Name="grid1">
+        <ScrollViewer Grid.Column="1" Name="scrollViewer1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      ScrollChanged="scrollViewer1_ScrollChanged">
+            <Canvas Name="canvas1" Height="100" Width="100"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        </ScrollViewer>
     </Grid>
 </UserControl>

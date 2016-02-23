@@ -24,5 +24,11 @@ namespace GoStore_FrontEnd
         {
             InitializeComponent();
         }
+        
+
+        private void scrollViewer1_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+
+        }
     }
 }

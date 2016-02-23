@@ -4,6 +4,11 @@
         Title="GoStore" Height="562" Width="1000" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:GoStore_FrontEnd">
     <Grid>
-        <local:CommitsMap HorizontalAlignment="Left" x:Name="cmap1" VerticalAlignment="Top" Height="531" Width="215"/>
-    </Grid>  
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="401*"/>
+            <ColumnDefinition Width="591*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:CommitsMap x:Name="cm1" Height="auto" Grid.Column="0" Width="auto"/>
+    </Grid>
 </Window>
