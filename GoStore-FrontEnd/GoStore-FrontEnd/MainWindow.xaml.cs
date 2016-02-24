@@ -23,6 +23,12 @@ namespace GoStore_FrontEnd
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void btn_test_cm_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
