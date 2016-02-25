@@ -27,28 +27,15 @@ namespace GoStore_FrontEnd
             public TimeNode()
             {
                 parentNodes = new List<TimeNode>();
-                drawn = false;
             }
             
-            public uint             index;
             public string           name;
             public string           text;
             public DateTime         time;
-            public bool             drawn;
             public List<TimeNode>   parentNodes;
+            public bool             _drawn;
         };
 
-        public class Track
-        {
-            public Track()
-            {
-
-            }
-
-
-
-            List<TimeNode> _nodes;
-        };
 
         // Methods:
 
@@ -59,15 +46,11 @@ namespace GoStore_FrontEnd
             canvas.Width = 0;
             canvas.Height = 0;
 
-            _topIndex = 0;
 
         }
         
         public void AddNode(TimeNode timeNode)
         {
-            timeNode.index = _topIndex++;
-            timeNode.drawn = false;
-
         }
 
         public bool RemoveNode(uint index)
@@ -77,10 +60,9 @@ namespace GoStore_FrontEnd
 
         public void ClearNodes()
         {
-            _topIndex = 0;
         }
 
-        public void ReDraw(uint maxDepth)
+        public void Draw(uint maxDepth)
         {
             canvas.Children.Clear();
             canvas.Width = 0;
@@ -89,7 +71,6 @@ namespace GoStore_FrontEnd
         }
         
         // Properties:
-        List<Track>     _tracks;
-        uint            _topIndex;
+        List<TimeNode>      _nodes;
     }
 }
