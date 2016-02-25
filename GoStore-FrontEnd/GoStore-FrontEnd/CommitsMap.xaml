@@ -13,13 +13,10 @@
     </UserControl.Background>
 
     <Grid Name="grid1">
-        <ScrollViewer Grid.Column="1" Name="scrollViewer1"
-                      HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Auto"
-                      ScrollChanged="scrollViewer1_ScrollChanged">
-            <Canvas Name="canvas1" Height="100" Width="100"
-                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
-
+        <ScrollViewer Name="scrollViewer1"
+                      HorizontalScrollBarVisibility="auto"
+                      VerticalScrollBarVisibility="auto">
+            <Canvas Name="canvas" Height="300" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

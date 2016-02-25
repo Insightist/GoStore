@@ -23,6 +23,42 @@ namespace GoStore_FrontEnd
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void btn_test_cm_Click(object sender, RoutedEventArgs e)
+        {
+            CommitsMap.TimeNode[] nodes = new CommitsMap.TimeNode[10];
+
+            for (int i = 0; i < nodes.Length; ++i )
+            {
+                nodes[i] = new CommitsMap.TimeNode();
+                nodes[i].name = "#" + i;
+            }
+
+            nodes[0].parentNodes.Add(nodes[1]);
+            nodes[1].parentNodes.Add(nodes[2]);
+            nodes[2].parentNodes.Add(nodes[3]);
+            nodes[3].parentNodes.Add(nodes[6]);
+            nodes[6].parentNodes.Add(nodes[7]);
+            nodes[7].parentNodes.Add(nodes[8]);
+            nodes[8].parentNodes.Add(nodes[9]);
+
+            nodes[3].parentNodes.Add(nodes[4]);
+            nodes[4].parentNodes.Add(nodes[5]);
+            nodes[5].parentNodes.Add(nodes[6]);
+
+
+
+            cm1.ClearNodes();
+
+            foreach(CommitsMap.TimeNode node in nodes)
+            {
+                cm1.AddNode(node);
+            }
+            cm1.AddStartNodeIndex(0);
+
+            cm1.ReDraw(50);
         }
     }
 }
