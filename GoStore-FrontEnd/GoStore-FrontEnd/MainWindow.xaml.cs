@@ -56,9 +56,9 @@ namespace GoStore_FrontEnd
             {
                 cm1.AddNode(node);
             }
-            cm1.AddStartNodeIndex(0);
+            cm1.AddStartIndex(0);
 
-            cm1.ReDraw(50);
+            cm1.Draw(50);
         }
     }
 }

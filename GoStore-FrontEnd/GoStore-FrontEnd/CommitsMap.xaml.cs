@@ -33,6 +33,7 @@ namespace GoStore_FrontEnd
             public string           text;
             public DateTime         time;
             public List<TimeNode>   parentNodes;
+
             public bool             _drawn;
         };
 
@@ -58,19 +59,42 @@ namespace GoStore_FrontEnd
             return true;
         }
 
+        public void AddStartIndex(uint index)
+        {
+            _startIndices.Add(index);
+        }
+
         public void ClearNodes()
         {
         }
 
         public void Draw(uint maxDepth)
         {
+            // Clean up the canvas
             canvas.Children.Clear();
             canvas.Width = 0;
             canvas.Height = 0;
+
+            // Clean up nodes' flags.
+            foreach (TimeNode eachnode in _nodes)
+                eachnode._drawn = false;
+
+            // Define vars
+            uint depth = 0;
+            TimeNode currNode;
+
+            // Start from each start index
+            foreach (int startNodeIdx in _startIndices)
+            {
+                // Point to the start node, and get ready to start drawing loop
+                currNode = _nodes[startNodeIdx];
+            }
+
 
         }
         
         // Properties:
         List<TimeNode>      _nodes;
+        List<uint>          _startIndices;
     }
 }
