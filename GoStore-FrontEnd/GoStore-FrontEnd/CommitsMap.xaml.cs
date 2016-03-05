@@ -97,16 +97,49 @@ namespace GoStore_FrontEnd
 
         public void ClearNodes()
         {
-
+            _nodes.Clear();
         }
 
-        public void Draw(uint maxDepth)
+        public void Draw(int maxDepth)
         {            
             _nodes.Sort();          // DESC sort.
+
+            //Clean up temp resources.
+            canvas.Children.Clear();
+            canvas.Width = 0;
+            canvas.Height = 0;
+
+            // Correct the max depth.
+            if (_nodes.Count < maxDepth)
+                maxDepth = (int)_nodes.Count;
+
+            // Rendering loop.
+            RadioButton rbtn;
+            Thickness margin = new Thickness();
+
+            for(int i = 0; i < maxDepth; i++)
+            {
+                rbtn = new RadioButton();
+
+                margin.Left = _nodes[i]._track * 50;
+                margin.Top = i * 80;
+
+                rbtn.Margin = margin;
+
+                canvas.Children.Add(rbtn);
+            }
+
+            _depth = maxDepth;
+        }
+
+        public void DrawContinue(uint maxDepth)
+        {
+            
         }
         
         // Properties:
         List<TimeNode>      _nodes;
         uint                _tracks;
+        int                 _depth;
     }
 }
