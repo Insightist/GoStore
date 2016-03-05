@@ -36,6 +36,16 @@ namespace GoStore_FrontEnd
                 nodes[i].name = "#" + i;
             }
 
+            nodes[0].time = new DateTime(2016, 3, 1);
+            nodes[1].time = new DateTime(2016, 2, 1);
+            nodes[2].time = new DateTime(2016, 5, 1);
+            nodes[3].time = new DateTime(2016, 3, 2);
+            nodes[4].time = new DateTime(2016, 3, 9);
+            nodes[5].time = new DateTime(2016, 4, 1);
+            nodes[6].time = new DateTime(2016, 4, 8);
+            nodes[7].time = new DateTime(2016, 2, 3);
+            nodes[8].time = new DateTime(2016, 2, 29);
+
             nodes[0].parentNodes.Add(nodes[1]);
             nodes[1].parentNodes.Add(nodes[2]);
             nodes[2].parentNodes.Add(nodes[3]);
@@ -56,7 +66,6 @@ namespace GoStore_FrontEnd
             {
                 cm1.AddNode(node);
             }
-            cm1.AddStartIndex(0);
 
             cm1.Draw(50);
         }

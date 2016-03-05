@@ -22,11 +22,20 @@ namespace GoStore_FrontEnd
     {
         // Structures:
 
-        public class TimeNode
+        public class TimeNode : IComparable
         {
             public TimeNode()
             {
                 parentNodes = new List<TimeNode>();
+
+                _track = 0xffffffff;
+            }
+
+            public int CompareTo(object obj)
+            {
+                TimeNode node = obj as TimeNode;
+
+                return -time.CompareTo(node.time);
             }
             
             public string           name;
@@ -35,11 +44,13 @@ namespace GoStore_FrontEnd
             public List<TimeNode>   parentNodes;
 
             public bool             _drawn;
+            public uint             _track;
         };
 
 
         // Methods:
 
+        // Constructor
         public CommitsMap()
         {
             InitializeComponent();
@@ -47,11 +58,36 @@ namespace GoStore_FrontEnd
             canvas.Width = 0;
             canvas.Height = 0;
 
+            _tracks = 0;
 
+            _nodes = new List<TimeNode>();
         }
         
         public void AddNode(TimeNode timeNode)
         {
+            _nodes.Add(timeNode);
+            timeNode._track = _tracks++;
+
+        }
+
+        public void AddNode(TimeNode timeNode, TimeNode upperNode)
+        {
+            upperNode.parentNodes.Add(timeNode);
+            timeNode._track = upperNode._track;
+        }
+
+        public void AddNode(TimeNode timeNode, List<TimeNode>upperNodes)
+        {
+            int countNodes = upperNodes.Count;
+            timeNode._track = 0;
+
+            for(int i = 0; i < countNodes; ++i)
+            {
+                upperNodes[i].parentNodes.Add(timeNode);
+
+                if (timeNode._track < upperNodes[i]._track)
+                    timeNode._track = upperNodes[i]._track;
+            }
         }
 
         public bool RemoveNode(uint index)
@@ -59,42 +95,18 @@ namespace GoStore_FrontEnd
             return true;
         }
 
-        public void AddStartIndex(uint index)
-        {
-            _startIndices.Add(index);
-        }
-
         public void ClearNodes()
         {
+
         }
 
         public void Draw(uint maxDepth)
-        {
-            // Clean up the canvas
-            canvas.Children.Clear();
-            canvas.Width = 0;
-            canvas.Height = 0;
-
-            // Clean up nodes' flags.
-            foreach (TimeNode eachnode in _nodes)
-                eachnode._drawn = false;
-
-            // Define vars
-            uint depth = 0;
-            TimeNode currNode;
-
-            // Start from each start index
-            foreach (int startNodeIdx in _startIndices)
-            {
-                // Point to the start node, and get ready to start drawing loop
-                currNode = _nodes[startNodeIdx];
-            }
-
-
+        {            
+            _nodes.Sort();          // DESC sort.
         }
         
         // Properties:
         List<TimeNode>      _nodes;
-        List<uint>          _startIndices;
+        uint                _tracks;
     }
 }
