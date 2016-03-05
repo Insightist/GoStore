@@ -16,7 +16,7 @@
         <ScrollViewer Name="scrollViewer1"
                       HorizontalScrollBarVisibility="auto"
                       VerticalScrollBarVisibility="auto">
-            <Canvas Name="canvas" Height="300" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Canvas Name="canvas" Width="222" Height="242"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
