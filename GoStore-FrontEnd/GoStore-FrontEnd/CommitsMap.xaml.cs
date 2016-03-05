@@ -84,7 +84,7 @@ namespace GoStore_FrontEnd
             int countNodes = upperNodes.Count;
             timeNode._track = upperNodes[0]._track;
 
-            for(int i = 1; i < countNodes; ++i)
+            for(int i = 0; i < countNodes; ++i)
             {
                 upperNodes[i].parentNodes.Add(timeNode);
 
@@ -121,23 +121,57 @@ namespace GoStore_FrontEnd
                 maxDepth = _nodes.Count;
 
             // Rendering loop.
-            RadioButton rbtn;
-            Thickness margin = new Thickness();
+            RadioButton         rbtn;
+            Thickness           margin = new Thickness();
+            LineGeometry        line;
+            Path                path;
+            uint                dist;
 
             for(int i = 0; i < maxDepth; i++)
             {
+                // Draw connecting line.
+                if (i != maxDepth - 1)      // Make sure that current node is not the last one.
+                {
+                    foreach(TimeNode parNode in _nodes[i].parentNodes)
+                    {
+                        dist = 0;
+                        foreach(TimeNode destNode in _nodes)
+                        {
+                            if (destNode == parNode)
+                                break;
+                            ++dist;
+                        }
+                        dist -= (uint)i;
+
+                        line = new LineGeometry();
+                        line.StartPoint = new Point(_nodes[i]._track * _SINGLE_HORIZONAL_OFFSET + _LINE_POINT_X_OFFSET,
+                            i * _SINGLE_VERTICAL_OFFSET + _LINE_POINT_Y_OFFSET);
+                        line.EndPoint = new Point(parNode._track * _SINGLE_HORIZONAL_OFFSET + _LINE_POINT_X_OFFSET,
+                            i * _SINGLE_VERTICAL_OFFSET + dist * _SINGLE_VERTICAL_OFFSET + _LINE_POINT_Y_OFFSET);
+
+                        path = new Path();
+                        path.Data = line;
+                        path.StrokeThickness = _LINE_THICKNESS;
+                        path.Stroke = Brushes.LightGreen;
+
+                        canvas.Children.Add(path);
+                    }
+                }
+                 
+
+                // Draw time node.
                 rbtn = new RadioButton();
 
-                margin.Left = _nodes[i]._track * 80;
-                margin.Top = i * 50;
+                margin.Left = _nodes[i]._track * _SINGLE_HORIZONAL_OFFSET;
+                margin.Top = i * _SINGLE_VERTICAL_OFFSET;
 
                 rbtn.Margin = margin;
                 rbtn.Content = _nodes[i].name;
 
                 canvas.Children.Add(rbtn);
-                canvas.Height += 50;
-                if (margin.Left >= canvas.Width + 80)
-                    canvas.Width = margin.Left + 80;
+                canvas.Height += _SINGLE_VERTICAL_OFFSET;
+                if (margin.Left >= canvas.Width + _SINGLE_HORIZONAL_OFFSET)
+                    canvas.Width = margin.Left + _SINGLE_HORIZONAL_OFFSET;
             }
 
             _depth = maxDepth;
@@ -152,5 +186,11 @@ namespace GoStore_FrontEnd
         List<TimeNode>      _nodes;
         uint                _tracks;
         int                 _depth;
+
+        const double _SINGLE_HORIZONAL_OFFSET = 80.0f;
+        const double _SINGLE_VERTICAL_OFFSET = 50.0f;
+        const double _LINE_POINT_X_OFFSET = 6.0f;
+        const double _LINE_POINT_Y_OFFSET = 8.0f;
+        const double _LINE_THICKNESS = 5.0f;
     }
 }

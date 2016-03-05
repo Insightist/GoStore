@@ -64,7 +64,12 @@ namespace GoStore_FrontEnd
             tempList.Add(nodes[10]);
 
             cm1.AddNode(nodes[12], tempList);
-            cm1.AddNode(nodes[13], nodes[12]);
+
+            tempList = new List<CommitsMap.TimeNode>();
+            tempList.Add(nodes[11]);
+            tempList.Add(nodes[12]);
+
+            cm1.AddNode(nodes[13], tempList);
 
             cm1.Draw(50);
         }
