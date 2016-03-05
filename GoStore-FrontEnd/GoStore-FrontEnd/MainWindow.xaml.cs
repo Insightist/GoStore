@@ -28,14 +28,14 @@ namespace GoStore_FrontEnd
 
         private void btn_test_cm_Click(object sender, RoutedEventArgs e)
         {
-            CommitsMap.TimeNode[] nodes = new CommitsMap.TimeNode[13];
+            CommitsMap.TimeNode[] nodes = new CommitsMap.TimeNode[14];
             List<CommitsMap.TimeNode> tempList;
 
             for (int i = 0; i < nodes.Length; ++i )
             {
                 nodes[i] = new CommitsMap.TimeNode();
                 nodes[i].name = "#" + i;
-                nodes[i].time = new DateTime(2015, 3, i+1);
+                nodes[i].time = new DateTime(2015, 3, 20 - i);
             }
 
 
@@ -44,21 +44,27 @@ namespace GoStore_FrontEnd
             cm1.AddNode(nodes[0]);
             cm1.AddNode(nodes[1], nodes[0]);
             cm1.AddNode(nodes[2], nodes[1]);
-            cm1.AddNode(nodes[3]);
-            cm1.AddNode(nodes[4], nodes[1]);
-            cm1.AddNode(nodes[5], nodes[3]);
-            cm1.AddNode(nodes[6], nodes[2]);
+            cm1.AddNode(nodes[3], nodes[1]);
+            cm1.AddNode(nodes[4], nodes[3]);
+            cm1.AddNode(nodes[5]);
+            cm1.AddNode(nodes[6], nodes[5]);
 
             tempList = new List<CommitsMap.TimeNode>();
+            tempList.Add(nodes[4]);
             tempList.Add(nodes[6]);
-            tempList.Add(nodes[5]);
 
             cm1.AddNode(nodes[7], tempList);
             cm1.AddNode(nodes[8], nodes[7]);
-            cm1.AddNode(nodes[9], nodes[8]);
-            cm1.AddNode(nodes[10], nodes[4]);
-            cm1.AddNode(nodes[11], nodes[9]);
-            cm1.AddNode(nodes[12], nodes[10]);
+            cm1.AddNode(nodes[9], nodes[2]);
+            cm1.AddNode(nodes[10], nodes[8]);
+            cm1.AddNode(nodes[11], nodes[8]);
+
+            tempList = new List<CommitsMap.TimeNode>();
+            tempList.Add(nodes[9]);
+            tempList.Add(nodes[10]);
+
+            cm1.AddNode(nodes[12], tempList);
+            cm1.AddNode(nodes[13], nodes[12]);
 
             cm1.Draw(50);
         }

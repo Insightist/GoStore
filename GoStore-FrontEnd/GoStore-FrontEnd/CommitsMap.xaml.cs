@@ -65,29 +65,36 @@ namespace GoStore_FrontEnd
         
         public void AddNode(TimeNode timeNode)
         {
-            _nodes.Add(timeNode);
             timeNode._track = _tracks++;
-
+            _nodes.Add(timeNode);
         }
 
         public void AddNode(TimeNode timeNode, TimeNode upperNode)
         {
+            timeNode._track = upperNode._track + (uint)upperNode.parentNodes.Count;
             upperNode.parentNodes.Add(timeNode);
-            timeNode._track = upperNode._track;
+            _nodes.Add(timeNode);
+
+            if (timeNode._track >= _tracks)
+                _tracks = timeNode._track + 1;
         }
 
         public void AddNode(TimeNode timeNode, List<TimeNode>upperNodes)
         {
             int countNodes = upperNodes.Count;
-            timeNode._track = 0;
+            timeNode._track = upperNodes[0]._track;
 
-            for(int i = 0; i < countNodes; ++i)
+            for(int i = 1; i < countNodes; ++i)
             {
                 upperNodes[i].parentNodes.Add(timeNode);
 
-                if (timeNode._track < upperNodes[i]._track)
+                if (timeNode._track > upperNodes[i]._track)
                     timeNode._track = upperNodes[i]._track;
             }
+
+            _nodes.Add(timeNode);
+
+            _tracks -= (uint)upperNodes.Count - 1;
         }
 
         public bool RemoveNode(uint index)
@@ -106,12 +113,12 @@ namespace GoStore_FrontEnd
 
             //Clean up temp resources.
             canvas.Children.Clear();
-            canvas.Width = 0;
+            canvas.Width = 80;
             canvas.Height = 0;
 
             // Correct the max depth.
             if (_nodes.Count < maxDepth)
-                maxDepth = (int)_nodes.Count;
+                maxDepth = _nodes.Count;
 
             // Rendering loop.
             RadioButton rbtn;
@@ -121,12 +128,16 @@ namespace GoStore_FrontEnd
             {
                 rbtn = new RadioButton();
 
-                margin.Left = _nodes[i]._track * 50;
-                margin.Top = i * 80;
+                margin.Left = _nodes[i]._track * 80;
+                margin.Top = i * 50;
 
                 rbtn.Margin = margin;
+                rbtn.Content = _nodes[i].name;
 
                 canvas.Children.Add(rbtn);
+                canvas.Height += 50;
+                if (margin.Left >= canvas.Width + 80)
+                    canvas.Width = margin.Left + 80;
             }
 
             _depth = maxDepth;
