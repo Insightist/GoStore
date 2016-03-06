@@ -6,10 +6,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True" Foreground="#FFDEDEDE" Background="#FF2C2C2C">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DarkScrollviewerRecDict.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid Name="grid1">
         <ScrollViewer Name="scrollViewer1"
                       HorizontalScrollBarVisibility="auto"
-                      VerticalScrollBarVisibility="auto">
+                      VerticalScrollBarVisibility="auto"
+                      Style="{StaticResource for_scrollviewer}">
             <Canvas Name="canvas" Width="222" Height="242" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,30,0,0"/>
         </ScrollViewer>
     </Grid>
