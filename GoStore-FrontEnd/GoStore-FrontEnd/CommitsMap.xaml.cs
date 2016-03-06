@@ -104,6 +104,7 @@ namespace GoStore_FrontEnd
 
         public void ClearNodes()
         {
+            _tracks = 0;
             _nodes.Clear();
         }
 
@@ -152,7 +153,13 @@ namespace GoStore_FrontEnd
                         path = new Path();
                         path.Data = line;
                         path.StrokeThickness = _LINE_THICKNESS;
-                        path.Stroke = Brushes.LightGreen;
+
+                        // Decide color of the line
+                        if(parNode._track > _nodes[i]._track)
+                            path.Stroke = IndexedColor((int)parNode._track);
+                        else
+                            path.Stroke = IndexedColor((int)_nodes[i]._track);
+
 
                         canvas.Children.Add(path);
                     }
@@ -167,6 +174,7 @@ namespace GoStore_FrontEnd
 
                 rbtn.Margin = margin;
                 rbtn.Content = _nodes[i].name;
+                rbtn.Foreground = Brushes.LightGray;
 
                 canvas.Children.Add(rbtn);
                 canvas.Height += _SINGLE_VERTICAL_OFFSET;
@@ -182,13 +190,81 @@ namespace GoStore_FrontEnd
             
         }
         
+        public SolidColorBrush IndexedColor(int index)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+
+            switch(index%8)
+            {
+                case 1:
+                    // Light Blue
+                    clr.R = 62;
+                    clr.G = 192;
+                    clr.B = 255;
+                    break;
+
+                case 2:
+                    // Yellow
+                    clr.R = 255;
+                    clr.G = 224;
+                    clr.B = 9;
+                    break;
+
+                case 3:
+                    // Orange
+                    clr.R = 254;
+                    clr.G = 139;
+                    clr.B = 63;
+                    break;
+
+                case 4: 
+                    // Red
+                    clr.R = 255;
+                    clr.G = 62;
+                    clr.B = 62;
+                    break;
+
+                case 5:
+                    // Purple
+                    clr.R = 197;
+                    clr.G = 62;
+                    clr.B = 255;
+                    break;
+
+                case 6:
+                    // Pink
+                    clr.R = 252;
+                    clr.G = 65;
+                    clr.B = 215;
+                    break;
+
+                case 7:
+                    // Deep Blue
+                    clr.R = 9;
+                    clr.G = 83;
+                    clr.B = 255;
+                    break;
+
+                default:
+                    // Light Green
+                    clr.R = 69;
+                    clr.G = 248;
+                    clr.B = 87;
+                    break;
+            }
+
+            return new SolidColorBrush(clr);
+        }
+
+
         // Properties:
         List<TimeNode>      _nodes;
         uint                _tracks;
         int                 _depth;
 
-        const double _SINGLE_HORIZONAL_OFFSET = 80.0f;
-        const double _SINGLE_VERTICAL_OFFSET = 50.0f;
+        const double _SINGLE_HORIZONAL_OFFSET = 50.0f;
+        const double _SINGLE_VERTICAL_OFFSET = 30.0f;
         const double _LINE_POINT_X_OFFSET = 6.0f;
         const double _LINE_POINT_Y_OFFSET = 8.0f;
         const double _LINE_THICKNESS = 5.0f;
