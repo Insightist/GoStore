@@ -174,6 +174,7 @@ namespace GoStore_FrontEnd
 
                 rbtn.Margin = margin;
                 rbtn.Content = _nodes[i].name;
+                rbtn.Foreground = Brushes.Gray;
 
                 canvas.Children.Add(rbtn);
                 canvas.Height += _SINGLE_VERTICAL_OFFSET;

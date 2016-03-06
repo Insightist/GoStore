@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True" Background="#FFF0F0F0">
+             d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True" Foreground="#FFDEDEDE" Background="#FF2C2C2C">
 
     <Grid Name="grid1">
         <ScrollViewer Name="scrollViewer1"
                       HorizontalScrollBarVisibility="auto"
                       VerticalScrollBarVisibility="auto">
-            <Canvas Name="canvas" Width="222" Height="242"/>
+            <Canvas Name="canvas" Width="222" Height="242" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,30,0,0"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
