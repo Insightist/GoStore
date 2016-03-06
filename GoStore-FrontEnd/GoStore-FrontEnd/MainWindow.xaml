@@ -4,6 +4,8 @@
         Title="GoStore" Height="768" Width="1366" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:GoStore_FrontEnd" Background="#FF1F1F1F" Foreground="#FFD6D6D6">
     <Grid Margin="0">
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="50*"/>
@@ -33,5 +35,10 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="99,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23" Grid.Column="1"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,208,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,236,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,292,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
     </Grid>
 </Window>
