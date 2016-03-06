@@ -14,8 +14,8 @@
                     <Grid>
                         <Rectangle
                             Fill="#AAAAAAAA"
-                            RadiusX="3"
-                            RadiusY="3"/>
+                            RadiusX="5"
+                            RadiusY="5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

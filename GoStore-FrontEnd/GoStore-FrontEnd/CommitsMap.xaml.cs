@@ -174,7 +174,7 @@ namespace GoStore_FrontEnd
 
                 rbtn.Margin = margin;
                 rbtn.Content = _nodes[i].name;
-                rbtn.Foreground = Brushes.Gray;
+                rbtn.Foreground = Brushes.LightGray;
 
                 canvas.Children.Add(rbtn);
                 canvas.Height += _SINGLE_VERTICAL_OFFSET;
@@ -263,8 +263,8 @@ namespace GoStore_FrontEnd
         uint                _tracks;
         int                 _depth;
 
-        const double _SINGLE_HORIZONAL_OFFSET = 80.0f;
-        const double _SINGLE_VERTICAL_OFFSET = 50.0f;
+        const double _SINGLE_HORIZONAL_OFFSET = 50.0f;
+        const double _SINGLE_VERTICAL_OFFSET = 30.0f;
         const double _LINE_POINT_X_OFFSET = 6.0f;
         const double _LINE_POINT_Y_OFFSET = 8.0f;
         const double _LINE_THICKNESS = 5.0f;

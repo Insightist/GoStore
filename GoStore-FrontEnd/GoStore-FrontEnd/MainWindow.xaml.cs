@@ -23,10 +23,10 @@ namespace GoStore_FrontEnd
         public MainWindow()
         {
             InitializeComponent();
-
+            btn_test_cm_Click();
         }
 
-        private void btn_test_cm_Click(object sender, RoutedEventArgs e)
+        private void btn_test_cm_Click()//object sender, RoutedEventArgs e)
         {
             CommitsMap.TimeNode[] nodes = new CommitsMap.TimeNode[14];
             List<CommitsMap.TimeNode> tempList;
