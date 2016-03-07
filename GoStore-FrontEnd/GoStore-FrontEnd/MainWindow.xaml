@@ -4,8 +4,6 @@
         Title="GoStore" Height="768" Width="1366" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:GoStore_FrontEnd" Background="#FF1F1F1F" Foreground="#FFD6D6D6">
     <Grid Margin="0">
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="50*"/>
@@ -17,13 +15,17 @@
         </Grid.ColumnDefinitions>
 
         <local:CommitsMap x:Name="cm1" Height="auto" Grid.Column="0" Width="auto" Grid.RowSpan="2"/>
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="90" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/usr-avatar-001.png"/>
-        <Label Content="Author" Grid.Column="1" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="50"/>
-        <Label Content="Date" Grid.Column="1" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="37"/>
-        <Label Content="Commit" Grid.Column="1" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="56"/>
-        <Label Name="clbAuthorName" Content="-- name --" Grid.Column="1" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Width="151" Foreground="#FFD6D6D6" Height="26"/>
-        <Label Name="clbDate" Content="-- date --" Grid.Column="1" HorizontalAlignment="Left" Margin="83,136,0,0" VerticalAlignment="Top" Width="151" Foreground="#FFD6D6D6" Height="26"/>
-        <Label Name="clbCommit" Content="-- commit --" Grid.Column="1" HorizontalAlignment="Left" Margin="83,167,0,0" VerticalAlignment="Top" Width="196" Foreground="#FFD6D6D6" Height="26"/>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="90" Margin="26,10,0,0" VerticalAlignment="Top" Width="80" Source="pack://siteoforigin:,,,/Resources/usr-avatar-001.png">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="10"/>
+            </Image.Effect>
+        </Image>
+        <Label Content="Author" Grid.Column="1" HorizontalAlignment="Left" Margin="26,105,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="50"/>
+        <Label Content="Date" Grid.Column="1" HorizontalAlignment="Left" Margin="26,136,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="37"/>
+        <Label Content="Commit" Grid.Column="1" HorizontalAlignment="Left" Margin="26,167,0,0" VerticalAlignment="Top" Foreground="#FFD6D6D6" Height="26" Width="56"/>
+        <Label Name="clbAuthorName" Content="-- name --" Grid.Column="1" HorizontalAlignment="Left" Margin="99,105,0,0" VerticalAlignment="Top" Width="191" Foreground="#FFD6D6D6" Height="26"/>
+        <Label Name="clbDate" Content="-- date --" Grid.Column="1" HorizontalAlignment="Left" Margin="99,136,0,0" VerticalAlignment="Top" Width="191" Foreground="#FFD6D6D6" Height="26"/>
+        <Label Name="clbCommit" Content="-- commit --" Grid.Column="1" HorizontalAlignment="Left" Margin="99,167,0,0" VerticalAlignment="Top" Width="191" Foreground="#FFD6D6D6" Height="26"/>
         <Label Content="Notes" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="102" Foreground="#FFD6D6D6" Height="26"/>
         <RichTextBox Grid.Column="2" Margin="10,41,10,10" UndoLimit="0" MinWidth="300" IsReadOnly="True" IsUndoEnabled="False" TextOptions.TextFormattingMode="Display" Background="#FF2C2C2C" Foreground="#FFD6D6D6" SelectionBrush="#FF787878" BorderThickness="0" ScrollViewer.CanContentScroll="True">
             <RichTextBox.Effect>
@@ -35,10 +37,7 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="99,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23" Grid.Column="1"/>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,208,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,236,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,264,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="99,292,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Style="{StaticResource FlatButton}" Height="23"/>
+        <Label Content="Changes" Grid.Column="1" HorizontalAlignment="Left" Margin="26,10,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFD6D6D6" FontWeight="Bold" Background="#FF3C3C3C"/>
+        <Label Content="History" Grid.Column="1" HorizontalAlignment="Left" Margin="99,10,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFD6D6D6"/>
     </Grid>
 </Window>
