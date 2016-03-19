@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using LibGit2Sharp;
+using Microsoft.Win32;
 
 namespace GoStore_FrontEnd
 {
@@ -20,58 +23,185 @@ namespace GoStore_FrontEnd
     /// </summary>
     public partial class MainWindow : Window
     {
+        CommitsMap_Manager _cmapManager;
+
         public MainWindow()
         {
             InitializeComponent();
-            btn_test_cm_Click();
         }
 
-        private void btn_test_cm_Click()//object sender, RoutedEventArgs e)
+        private void frm_TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            CommitsMap.TimeNode[] nodes = new CommitsMap.TimeNode[14];
-            List<CommitsMap.TimeNode> tempList;
-
-            for (int i = 0; i < nodes.Length; ++i )
-            {
-                nodes[i] = new CommitsMap.TimeNode();
-                nodes[i].name = "#" + i;
-                nodes[i].time = new DateTime(2015, 3, 20 - i);
-            }
-
-
-            cm1.ClearNodes();
-
-            cm1.AddNode(nodes[0]);
-            cm1.AddNode(nodes[1], nodes[0]);
-            cm1.AddNode(nodes[2], nodes[1]);
-            cm1.AddNode(nodes[3], nodes[1]);
-            cm1.AddNode(nodes[4], nodes[3]);
-            cm1.AddNode(nodes[5]);
-            cm1.AddNode(nodes[6], nodes[5]);
-
-            tempList = new List<CommitsMap.TimeNode>();
-            tempList.Add(nodes[4]);
-            tempList.Add(nodes[6]);
-
-            cm1.AddNode(nodes[7], tempList);
-            cm1.AddNode(nodes[8], nodes[7]);
-            cm1.AddNode(nodes[9], nodes[2]);
-            cm1.AddNode(nodes[10], nodes[8]);
-            cm1.AddNode(nodes[11], nodes[8]);
-
-            tempList = new List<CommitsMap.TimeNode>();
-            tempList.Add(nodes[9]);
-            tempList.Add(nodes[10]);
-
-            cm1.AddNode(nodes[12], tempList);
-
-            tempList = new List<CommitsMap.TimeNode>();
-            tempList.Add(nodes[11]);
-            tempList.Add(nodes[12]);
-
-            cm1.AddNode(nodes[13], tempList);
-
-            cm1.Draw(50);
+            this.DragMove();
         }
+
+        private void btn_close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void winMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            _cmapManager = new CommitsMap_Manager(cm1, "G:\\Academic\\SATAMS");
+            _cmapManager.Load();
+
+            cm1.Draw(500);
+        }
+
+        private void btn_newRepo_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 218;
+            clr.G = 114;
+            clr.B = 90;
+
+            btn_newRepo.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_newRepo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_newRepo.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_openRepo_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 218;
+            clr.G = 114;
+            clr.B = 90;
+
+            btn_openRepo.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_openRepo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_openRepo.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_setting_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 218;
+            clr.G = 114;
+            clr.B = 90;
+
+            btn_setting.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_setting_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_setting.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_max_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 37;
+            clr.G = 116;
+            clr.B = 210;
+
+            btn_max.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_max_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_max.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_close_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 255;
+            clr.G = 100;
+            clr.B = 50;
+
+            btn_close.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_close_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_close.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_min_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 37;
+            clr.G = 116;
+            clr.B = 210;
+
+            btn_min.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_min_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Color clr = new Color();
+            clr.A = 255;
+            clr.R = 210;
+            clr.G = 70;
+            clr.B = 37;
+
+            btn_min.Background = new SolidColorBrush(clr);
+        }
+
+        private void btn_max_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+                btn_max.Content = "↓";
+            }
+            else if(this.WindowState == System.Windows.WindowState.Maximized)
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+                btn_max.Content = "↑";
+            }
+        }
+
+        private void btn_min_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
+
+        private void btn_newRepo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }    
     }
 }

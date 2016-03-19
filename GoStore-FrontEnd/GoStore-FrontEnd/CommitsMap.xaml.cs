@@ -26,7 +26,7 @@ namespace GoStore_FrontEnd
         {
             public TimeNode()
             {
-                parentNodes = new List<TimeNode>();
+                _parentNodes = new List<TimeNode>();
 
                 _track = 0xffffffff;
             }
@@ -38,11 +38,12 @@ namespace GoStore_FrontEnd
                 return -time.CompareTo(node.time);
             }
             
-            public string           name;
-            public string           text;
-            public DateTime         time;
-            public List<TimeNode>   parentNodes;
 
+            public string           text;
+            public string           sha;
+            public DateTime         time;
+
+            public List<TimeNode>   _parentNodes;
             public bool             _drawn;
             public uint             _track;
         };
@@ -71,13 +72,14 @@ namespace GoStore_FrontEnd
 
         public void AddNode(TimeNode timeNode, TimeNode upperNode)
         {
-            timeNode._track = upperNode._track + (uint)upperNode.parentNodes.Count;
-            upperNode.parentNodes.Add(timeNode);
+            timeNode._track = upperNode._track + (uint)upperNode._parentNodes.Count;
+            upperNode._parentNodes.Add(timeNode);
             _nodes.Add(timeNode);
 
             if (timeNode._track >= _tracks)
                 _tracks = timeNode._track + 1;
         }
+
 
         public void AddNode(TimeNode timeNode, List<TimeNode>upperNodes)
         {
@@ -86,7 +88,7 @@ namespace GoStore_FrontEnd
 
             for(int i = 0; i < countNodes; ++i)
             {
-                upperNodes[i].parentNodes.Add(timeNode);
+                upperNodes[i]._parentNodes.Add(timeNode);
 
                 if (timeNode._track > upperNodes[i]._track)
                     timeNode._track = upperNodes[i]._track;
@@ -102,6 +104,16 @@ namespace GoStore_FrontEnd
             return true;
         }
 
+        public TimeNode IsTimeNodeExist(string sha)
+        {
+            foreach(var node in _nodes)
+            {
+                if (node.sha == sha)
+                    return node;
+            }
+            return null;
+        }
+
         public void ClearNodes()
         {
             _tracks = 0;
@@ -114,7 +126,7 @@ namespace GoStore_FrontEnd
 
             //Clean up temp resources.
             canvas.Children.Clear();
-            canvas.Width = 80;
+            canvas.Width = _STRIDE_UNIT_WIDTH;
             canvas.Height = 0;
 
             // Correct the max depth.
@@ -133,7 +145,7 @@ namespace GoStore_FrontEnd
                 // Draw connecting line.
                 if (i != maxDepth - 1)      // Make sure that current node is not the last one.
                 {
-                    foreach(TimeNode parNode in _nodes[i].parentNodes)
+                    foreach(TimeNode parNode in _nodes[i]._parentNodes)
                     {
                         dist = 0;
                         foreach(TimeNode destNode in _nodes)
@@ -173,13 +185,15 @@ namespace GoStore_FrontEnd
                 margin.Top = i * _SINGLE_VERTICAL_OFFSET;
 
                 rbtn.Margin = margin;
-                rbtn.Content = _nodes[i].name;
-                rbtn.Foreground = Brushes.LightGray;
+                rbtn.Foreground = Brushes.Black;
+
+
+                rbtn.Content = _nodes[i].text.Substring(0, _nodes[i].text.IndexOf("\n"));
 
                 canvas.Children.Add(rbtn);
                 canvas.Height += _SINGLE_VERTICAL_OFFSET;
-                if (margin.Left >= canvas.Width + _SINGLE_HORIZONAL_OFFSET)
-                    canvas.Width = margin.Left + _SINGLE_HORIZONAL_OFFSET;
+                if (margin.Left != canvas.Width + _SINGLE_HORIZONAL_OFFSET + _STRIDE_UNIT_WIDTH)
+                    canvas.Width = margin.Left + _SINGLE_HORIZONAL_OFFSET + _STRIDE_UNIT_WIDTH;
             }
 
             _depth = maxDepth;
@@ -263,6 +277,7 @@ namespace GoStore_FrontEnd
         uint                _tracks;
         int                 _depth;
 
+        const double _STRIDE_UNIT_WIDTH = 500.0f;
         const double _SINGLE_HORIZONAL_OFFSET = 50.0f;
         const double _SINGLE_VERTICAL_OFFSET = 30.0f;
         const double _LINE_POINT_X_OFFSET = 6.0f;

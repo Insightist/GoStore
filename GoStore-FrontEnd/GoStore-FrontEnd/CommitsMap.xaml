@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True" Foreground="#FFDEDEDE" Background="#FF2C2C2C">
+             d:DesignHeight="473" d:DesignWidth="406" SnapsToDevicePixels="True" Foreground="Black">
 
     <UserControl.Resources>
         <ResourceDictionary>
