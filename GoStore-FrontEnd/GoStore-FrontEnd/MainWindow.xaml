@@ -53,10 +53,10 @@
                MouseEnter="btn_newRepo_MouseEnter" MouseLeave="btn_newRepo_MouseLeave" Grid.ColumnSpan="2" MouseLeftButtonDown="btn_newRepo_MouseLeftButtonDown"/>
         <Label Name="btn_openRepo" Content="Open Repository" HorizontalAlignment="Left" Margin="325,0,0,0" Width="137"
         	HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="14" Cursor="Hand" Background="#FFD24625"
-        	MouseEnter="btn_openRepo_MouseEnter"  MouseLeave="btn_openRepo_MouseLeave"  Grid.ColumnSpan="3"/>
+        	MouseEnter="btn_openRepo_MouseEnter"  MouseLeave="btn_openRepo_MouseLeave"  Grid.ColumnSpan="3" MouseLeftButtonDown="btn_openRepo_MouseLeftButtonDown"/>
         <Label Name="btn_setting" Content="Setting" HorizontalAlignment="Left" Margin="465,0,0,0" Width="89"
         	HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="14" Cursor="Hand" Background="#FFD24625"
-        	MouseEnter="btn_setting_MouseEnter"  MouseLeave="btn_setting_MouseLeave" Grid.ColumnSpan="3"/>
+        	MouseEnter="btn_setting_MouseEnter"  MouseLeave="btn_setting_MouseLeave" Grid.ColumnSpan="3" MouseLeftButtonDown="btn_setting_MouseLeftButtonDown"/>
         <TabControl Grid.Column="1" Margin="10,20,10,10" Grid.Row="2" BorderBrush="#FFD24625" Background="White">
             <TabItem Header="Working Space" BorderBrush="{x:Null}" Background="#FFFCCDB6" Style="{DynamicResource TabItemStyle}">
                 <Grid Background="White"/>

@@ -139,6 +139,7 @@ namespace GoStore_FrontEnd
             LineGeometry        line;
             Path                path;
             uint                dist;
+            int                 clrfIndex;
 
             for(int i = 0; i < maxDepth; i++)
             {
@@ -186,9 +187,10 @@ namespace GoStore_FrontEnd
 
                 rbtn.Margin = margin;
                 rbtn.Foreground = Brushes.Black;
-
-
-                rbtn.Content = _nodes[i].text.Substring(0, _nodes[i].text.IndexOf("\n"));
+                                
+                clrfIndex = _nodes[i].text.IndexOf("\n");
+                clrfIndex = clrfIndex < 0? 0: clrfIndex;
+                rbtn.Content = _nodes[i].text.Substring(0, clrfIndex);
 
                 canvas.Children.Add(rbtn);
                 canvas.Height += _SINGLE_VERTICAL_OFFSET;

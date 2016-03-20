@@ -43,6 +43,8 @@ namespace GoStore_FrontEnd
             CommitsMap.TimeNode upperTimeNode;
             List<CommitsMap.TimeNode> upperTimeNodes;
 
+            _cmtMap.ClearNodes();      
+
             try
             {
                 _InvertCommitsTree();
@@ -76,9 +78,9 @@ namespace GoStore_FrontEnd
                     }                    
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
+                throw exception;
             }
         }
 
@@ -145,9 +147,9 @@ namespace GoStore_FrontEnd
                     _commits.Sort();
                 }
             }
-            catch(Exception)
+            catch(Exception exception)
             {
-
+                throw exception;
             }           
         }
 

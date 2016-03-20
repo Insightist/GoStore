@@ -42,10 +42,6 @@ namespace GoStore_FrontEnd
 
         private void winMain_Loaded(object sender, RoutedEventArgs e)
         {
-            _cmapManager = new CommitsMap_Manager(cm1, "G:\\Academic\\SATAMS");
-            _cmapManager.Load();
-
-            cm1.Draw(500);
         }
 
         private void btn_newRepo_MouseEnter(object sender, MouseEventArgs e)
@@ -201,7 +197,67 @@ namespace GoStore_FrontEnd
 
         private void btn_newRepo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
+            fd.ShowNewFolderButton = true;
+            fd.Description = "Select a folder that you want to make it as a repository.";            
             
+            string path;
+
+            try
+            {
+                if (System.Windows.Forms.DialogResult.OK == fd.ShowDialog())
+                {
+                    path = fd.SelectedPath;
+
+                    Repository.Init(path);
+
+                    _cmapManager = new CommitsMap_Manager(cm1, path);
+                    _cmapManager.Load();
+
+                    cm1.Draw(500);
+
+                    SuccessWindow_CreateRepo succWin = new SuccessWindow_CreateRepo();
+                    succWin.ShowDialog();
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Error occurs. Cannot create a new repoistory", "Warning");
+            }
+
+        }
+
+        private void btn_openRepo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog fd = new System.Windows.Forms.FolderBrowserDialog();
+            fd.ShowNewFolderButton = false;
+            fd.Description = "Select repoistory's directory";
+
+            string path;
+
+            try
+            {
+                if (System.Windows.Forms.DialogResult.OK == fd.ShowDialog())
+                {
+                    path = fd.SelectedPath;
+
+                    _cmapManager = new CommitsMap_Manager(cm1, path);
+                    _cmapManager.Load();
+
+                    cm1.Draw(500);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error occurs. Cannot open the repository", "Warning");
+            }
+        }
+
+        private void btn_setting_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Setting winSetting = new Setting();
+
+            winSetting.ShowDialog();
         }    
     }
 }

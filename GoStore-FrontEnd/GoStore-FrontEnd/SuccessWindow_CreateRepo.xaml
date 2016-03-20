@@ -1,0 +1,19 @@
+﻿<Window x:Class="GoStore_FrontEnd.SuccessWindow_CreateRepo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SuccessWindow_CreateRepo" Height="205" Width="564" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFE26F54" Offset="0"/>
+            <GradientStop Color="#FFCF4220" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Frame Name="frm_main" Content="" MouseLeftButtonDown="frm_main_MouseLeftButtonDown"/>
+        <Label Content="Success" HorizontalAlignment="Left" Margin="55,28,0,0" VerticalAlignment="Top" FontSize="20" Foreground="White" MouseLeftButtonDown="frm_main_MouseLeftButtonDown"/>
+        <Label Content="You have create a new repository successfully." HorizontalAlignment="Left" Margin="109,75,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" MouseLeftButtonDown="frm_main_MouseLeftButtonDown"/>
+        <Label Name="btn_okay" Content="Okay" HorizontalAlignment="Left" Margin="378,137,0,0" VerticalAlignment="Top" Height="40" Width="108" FontSize="14" Foreground="#FFE8E8E8"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFE0401B" BorderBrush="#FFD69383" BorderThickness="1"
+               MouseEnter="btn_okay_MouseEnter" MouseLeave="btn_okay_MouseLeave" MouseLeftButtonDown="btn_okay_MouseLeftButtonDown" Cursor="Hand"/>
+    </Grid>
+</Window>
