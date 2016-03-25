@@ -38,6 +38,10 @@
     <Reference Include="LibGit2Sharp">
       <HintPath>..\packages\LibGit2Sharp.0.22.0\lib\net40\LibGit2Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -59,12 +63,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutUs.xaml.cs">
+      <DependentUpon>AboutUs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoteWin.xaml.cs">
+      <DependentUpon>NoteWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
     <Compile Include="SuccessWindow_CreateRepo.xaml.cs">
       <DependentUpon>SuccessWindow_CreateRepo.xaml</DependentUpon>
     </Compile>
+    <Page Include="AboutUs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommitsMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +108,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NoteWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +157,11 @@
     <EmbeddedResource Include="Resources\usr-avatar-001.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\usr_avatar_002.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

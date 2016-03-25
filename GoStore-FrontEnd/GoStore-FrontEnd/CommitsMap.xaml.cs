@@ -24,6 +24,7 @@ namespace GoStore_FrontEnd
 
         public class TimeNode : IComparable
         {
+
             public TimeNode()
             {
                 _parentNodes = new List<TimeNode>();
@@ -47,6 +48,36 @@ namespace GoStore_FrontEnd
             public bool             _drawn;
             public uint             _track;
         };
+
+
+        // Properties:
+        List<TimeNode> _nodes;
+        uint _tracks;
+        int _depth;
+
+        const double _STRIDE_UNIT_WIDTH = 500.0f;
+        const double _SINGLE_HORIZONAL_OFFSET = 50.0f;
+        const double _SINGLE_VERTICAL_OFFSET = 30.0f;
+        const double _LINE_POINT_X_OFFSET = 6.0f;
+        const double _LINE_POINT_Y_OFFSET = 8.0f;
+        const double _LINE_THICKNESS = 5.0f;
+
+        public static readonly RoutedEvent CommitSelectedEvent =
+            EventManager.RegisterRoutedEvent("CommitSelected",
+            RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<string>), typeof(CommitsMap));
+
+        public event RoutedPropertyChangedEventHandler<string> CommitSelected
+        {
+            add
+            {
+                this.AddHandler(CommitSelectedEvent, value);
+            }
+
+            remove
+            {
+                this.RemoveHandler(CommitSelectedEvent, value);
+            }
+        }
 
 
         // Methods:
@@ -187,9 +218,12 @@ namespace GoStore_FrontEnd
 
                 rbtn.Margin = margin;
                 rbtn.Foreground = Brushes.Black;
+
+                rbtn.Checked += OnCommitSelected;
+                rbtn.Name = "cmt_" + _nodes[i].sha;
                                 
                 clrfIndex = _nodes[i].text.IndexOf("\n");
-                clrfIndex = clrfIndex < 0? 0: clrfIndex;
+                clrfIndex = clrfIndex < 0 ? _nodes[i].text.Length : clrfIndex;
                 rbtn.Content = _nodes[i].text.Substring(0, clrfIndex);
 
                 canvas.Children.Add(rbtn);
@@ -273,17 +307,15 @@ namespace GoStore_FrontEnd
             return new SolidColorBrush(clr);
         }
 
+        protected virtual void OnCommitSelected(object sender, RoutedEventArgs e)
+        {
+            RadioButton rbtn = sender as RadioButton;
+            string commitSha = rbtn.Name.Substring(rbtn.Name.IndexOf("_") + 1);
 
-        // Properties:
-        List<TimeNode>      _nodes;
-        uint                _tracks;
-        int                 _depth;
+            RoutedPropertyChangedEventArgs<string> arg =
+                new RoutedPropertyChangedEventArgs<string>(rbtn.Name, commitSha, CommitSelectedEvent);
 
-        const double _STRIDE_UNIT_WIDTH = 500.0f;
-        const double _SINGLE_HORIZONAL_OFFSET = 50.0f;
-        const double _SINGLE_VERTICAL_OFFSET = 30.0f;
-        const double _LINE_POINT_X_OFFSET = 6.0f;
-        const double _LINE_POINT_Y_OFFSET = 8.0f;
-        const double _LINE_THICKNESS = 5.0f;
+            this.RaiseEvent(arg);
+        }
     }
 }

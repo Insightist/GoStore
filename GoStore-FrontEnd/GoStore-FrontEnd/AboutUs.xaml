@@ -1,0 +1,26 @@
+﻿<Window x:Class="GoStore_FrontEnd.AboutUs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AboutUs" Height="361" Width="538" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FFF3F3F3" BorderBrush="#FFD44928" BorderThickness="1">
+    <Grid>
+        <Frame Name="frm_title" Content="" Height="84" Margin="0" VerticalAlignment="Top" MouseLeftButtonDown="frm_title_MouseLeftButtonDown">
+            <Frame.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD65F43" Offset="0"/>
+                    <GradientStop Color="#FFD85232" Offset="0.98"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+        </Frame>
+        <Label Name="lbl_title" Content="About Us" HorizontalAlignment="Left" Margin="45,34,0,0" VerticalAlignment="Top"
+               Foreground="White" FontSize="24" MouseLeftButtonDown="lbl_title_MouseLeftButtonDown"/>
+        <Button Name="btn_okay" Content="Okay" HorizontalAlignment="Left" Margin="410,319,0,0" VerticalAlignment="Top" Width="103" Height="30" Click="btn_okay_Click"/>
+        <Label Content="Team" HorizontalAlignment="Left" Margin="160,108,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Demonstration" HorizontalAlignment="Left" Margin="87,144,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Insightist" HorizontalAlignment="Left" Margin="238,108,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="GoStore" HorizontalAlignment="Left" Margin="238,144,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Intro" HorizontalAlignment="Left" Margin="165,180,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="An Office-Document Manager" HorizontalAlignment="Left" Margin="238,180,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Version" HorizontalAlignment="Left" Margin="144,216,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="ver 0.2.5 (Demo)" HorizontalAlignment="Left" Margin="238,216,0,0" VerticalAlignment="Top" FontSize="16"/>
+    </Grid>
+</Window>
