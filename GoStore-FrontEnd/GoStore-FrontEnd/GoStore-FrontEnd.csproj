@@ -66,6 +66,9 @@
     <Compile Include="AboutUs.xaml.cs">
       <DependentUpon>AboutUs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditNotes.xaml.cs">
+      <DependentUpon>EditNotes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoteWin.xaml.cs">
       <DependentUpon>NoteWin.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DarkScrollviewerRecDict.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditNotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

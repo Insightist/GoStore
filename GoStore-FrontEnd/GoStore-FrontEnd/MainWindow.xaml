@@ -4,7 +4,8 @@
         Title="GoStore" Height="768" Width="1366" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:GoStore_FrontEnd" Foreground="#FFD6D6D6"
         Name="winMain" BorderThickness="1" BorderBrush="#FFD24625"
-        Loaded="winMain_Loaded" WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" MinWidth="800" MinHeight="500">
+        Loaded="winMain_Loaded" WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" MinWidth="800" MinHeight="500"
+        Closing="winMain_Closing">
     <Window.Resources>
     </Window.Resources>
     <Window.Background>
@@ -75,14 +76,13 @@
                         <RowDefinition Height="185*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Button Content="Commit Selected" HorizontalAlignment="Left" Height="36" Margin="350,8,0,0" Grid.Row="3" VerticalAlignment="Top" Width="110" Foreground="#FFD24625"/>
-                    <Button Content="Stage Selected" HorizontalAlignment="Left" Height="36" Grid.Row="3" VerticalAlignment="Top" Width="110" Margin="10,8,0,0" Foreground="#FF00B028"/>
+                    <Button Name="btn_commit" Content="Commit" HorizontalAlignment="Left" Height="36" Margin="350,8,0,0" Grid.Row="3" VerticalAlignment="Top" Width="110" Foreground="#FF09B220" Click="btn_commit_Click"/>
+                    <Button Name="btn_stage" Content="Stage" HorizontalAlignment="Left" Height="36" Grid.Row="3" VerticalAlignment="Top" Width="110" Margin="10,8,0,0" Foreground="#FFD24625" Click="btn_stage_Click"/>
                     <ComboBox Name="cbx_branch" HorizontalAlignment="Left" Height="24" Margin="67,6,0,0" VerticalAlignment="Top" Width="183"/>
                     <Label Content="Branch" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="52"/>
-                    <ListBox Name="lst_unstaged" Margin="5,25,5,5" Grid.Row="1" Foreground="#FFD24625" FontSize="14" Background="{x:Null}" BorderThickness="1" BorderBrush="#FFDEDFE0"
-                             SelectionMode="Extended"/>
+                    <ListBox Name="lst_unstaged" Margin="5,25,5,5" Grid.Row="1" Foreground="#FFD24625" Background="{x:Null}" BorderThickness="1" BorderBrush="#FFDEDFE0"/>
                     <Label Content="Unstaged" HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-                    <ListBox Name="lst_staged" Margin="5,25,5,0" Grid.Row="2" Background="{x:Null}" BorderThickness="1" SelectionMode="Extended" BorderBrush="#FFDEDFE0"/>
+                    <ListBox Name="lst_staged" Margin="5,25,5,0" Grid.Row="2" Background="{x:Null}" BorderThickness="1" BorderBrush="#FFDEDFE0" Foreground="#FF09B220"/>
                     <Label Content="Staged" HorizontalAlignment="Left" Margin="6,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
                     <Label Content="-- X files to be commit --" HorizontalAlignment="Left" Margin="178,13,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="#FFD24625"/>
                 </Grid>

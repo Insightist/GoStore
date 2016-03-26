@@ -34,9 +34,13 @@ namespace GoStore_FrontEnd
         CommitsMap_Manager  _cmapManager;
         List<string>        _unstagedFiles;
         List<string>        _stagedFiles;
-        List<string>        _historyFiles;
         List<string>        _historyFilesShas;
+        List<string>        _historyFiles;
         string              _repoPath;
+
+        //Microsoft.Office.Interop.Word.Application
+        //    _wordApplication;
+
 
         public string       installedPath;
         
@@ -53,6 +57,8 @@ namespace GoStore_FrontEnd
             _stagedFiles = new List<string>();
             _historyFiles = new List<string>();
             _historyFilesShas = new List<string>();
+
+            //_wordApplication = new Microsoft.Office.Interop.Word.Application();
 
             // !!! For Test Only
             installedPath = "F:\\FireField\\3";
@@ -314,14 +320,6 @@ namespace GoStore_FrontEnd
             {
                 if (System.Windows.Forms.DialogResult.OK == fd.ShowDialog())
                 {
-                    // Clean up first.
-                    _stagedFiles.Clear();
-                    _unstagedFiles.Clear();
-                    lst_historyFiles.Items.Clear();
-                    lst_staged.Items.Clear();
-                    lst_unstaged.Items.Clear();
-
-
                     // Set path.
                     _repoPath = fd.SelectedPath;
 
@@ -457,6 +455,12 @@ namespace GoStore_FrontEnd
                 dataSource.Close();
                 dataSource = null;
 
+                if(doc != null)
+                {
+                    doc.Close();
+                    doc = null;
+                }
+
                 doc = ConvertWordDocToXPSDoc(installedPath + "\\tempData\\origin\\checkout-file-preview.ckf",
                     installedPath + "\\tempData\\converted\\checkout-file-preview.cvt");
 
@@ -527,7 +531,6 @@ namespace GoStore_FrontEnd
                     this.Cursor = Cursors.Wait;
 
                     repo = new Repository(_repoPath);
-
 
                     foreach (var item in lst_historyFiles.SelectedItems)
                     {
@@ -619,6 +622,7 @@ namespace GoStore_FrontEnd
             BinaryWriter dataDest = null;
             FileStream fs = null;
             Exception thisEx;
+            DirectoryInfo dirInfo = new DirectoryInfo(_repoPath);
 
             byte[] buffer = new byte[2048];
             int bytesRead = 0;
@@ -631,12 +635,11 @@ namespace GoStore_FrontEnd
 
                 repo = new Repository(_repoPath);
 
-
                 foreach (var item in lst_historyFiles.SelectedItems)
                 {
                     path = _repoPath;
 
-                    selectedline = item as string;
+                    selectedline = item as string;                    
 
                     i = 0;
                     foreach (var line in _historyFiles)
@@ -660,6 +663,9 @@ namespace GoStore_FrontEnd
                     path += "\\" + selectedline;
 
                     ConfirmDirectory(path);
+
+                    if (File.Exists(path))
+                        File.Delete(path);
 
                     fs = new FileStream(path, FileMode.CreateNew);
                     dataDest = new BinaryWriter(fs);
@@ -706,6 +712,65 @@ namespace GoStore_FrontEnd
                 }
 
                 this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void btn_stage_Click(object sender, RoutedEventArgs e)
+        {
+            Repository repo;
+            string path;
+
+            try
+            {
+                repo = new Repository(_repoPath);
+
+                var selectedItems = lst_unstaged.SelectedItems;
+
+                foreach (var item in _unstagedFiles)
+                {
+                    path = item as string;
+
+                    repo.Stage(path);
+                }
+
+                RefreshStatus(repo);
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void btn_commit_Click(object sender, RoutedEventArgs e)
+        {
+            Repository repo;
+            EditNotes editNotesWin;
+            string notes = String.Empty;
+
+            if (lst_staged.Items.Count <= 0)
+                return;
+
+            try
+            {
+                repo = new Repository(_repoPath);
+
+                editNotesWin = new EditNotes();
+
+                if(editNotesWin.ShowDialog() == true)
+                {
+                    notes = editNotesWin.notes;
+                    repo.Commit(notes);
+                    RefreshStatus(repo);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Aborting commit due to empty commit notes.", "Infomation");
+                }
+            }
+            finally
+            {
+                MessageBox.Show(this, "Cannot commit into the repository", "Error");
             }
         }
 
@@ -763,7 +828,6 @@ namespace GoStore_FrontEnd
                     lst_historyFiles.Items.Add(item);
                 }
 
-
                 // Show time interval
                 timeLapsed = System.DateTimeOffset.Now - cmt.Committer.When;
 
@@ -819,6 +883,14 @@ namespace GoStore_FrontEnd
             RepositoryStatus status = repo.RetrieveStatus();
             int chrIdx = 0;
 
+            // Clean up first.
+            _stagedFiles.Clear();
+            _unstagedFiles.Clear();
+
+            lst_historyFiles.Items.Clear();
+            lst_staged.Items.Clear();
+            lst_unstaged.Items.Clear();
+
             foreach (var entry in status)
             {
                 chrIdx = entry.FilePath.LastIndexOf('\\');
@@ -853,7 +925,7 @@ namespace GoStore_FrontEnd
                 }
 
                     // Staged
-                else if (entry.State == FileStatus.ModifiedInIndex)
+                else if (entry.State == FileStatus.ModifiedInIndex || entry.State == (FileStatus.Staged | FileStatus.Modified))
                 {
                     lst_staged.Items.Add("[ modified ]  【 " + entry.FilePath.Substring(chrIdx) + " 】  @@ " + entry.FilePath);
                     _stagedFiles.Add(entry.FilePath);
@@ -911,30 +983,29 @@ namespace GoStore_FrontEnd
         private XpsDocument ConvertWordDocToXPSDoc(string wordDocName, string xpsDocName)
         {
             // Create a WordApplication and add Document to it
-            Microsoft.Office.Interop.Word.Application
-                wordApplication = new Microsoft.Office.Interop.Word.Application();
-            wordApplication.Documents.Add(wordDocName);
+            Microsoft.Office.Interop.Word.Application _wordApplication = new Microsoft.Office.Interop.Word.Application();
+            _wordApplication.Documents.Add(wordDocName);
 
-
-            Document doc = wordApplication.ActiveDocument;
+            Document doc = _wordApplication.ActiveDocument;
             // You must ensure you have Microsoft.Office.Interop.Word.Dll version 12.
             // Version 11 or previous versions do not have WdSaveFormat.wdFormatXPS option
             try
             {
                 doc.SaveAs(xpsDocName, WdSaveFormat.wdFormatXPS);
-                wordApplication.Quit();
+                _wordApplication.Quit();
 
                 XpsDocument xpsDoc = new XpsDocument(xpsDocName, System.IO.FileAccess.Read);
                 return xpsDoc;
             }
             catch (Exception exp)
             {
-                string str = exp.Message;
-            }
-            return null;
+                throw exp;
+            }           
         }
 
-
-
+        private void winMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
     }
 }
